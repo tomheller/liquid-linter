@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "bluebird": "^3.3.5",
-    "liquid-node": "^2.6.1"
+    "liquid-node": "^2.6.1",
+    "require-dir": "^0.3.0"
   }
 }

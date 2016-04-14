@@ -13,6 +13,8 @@ describe('tags', function() {
     it('should return [].length 2 when section tag is unknown', function (done) {
       linter.lintFile('./testcases/sectiontag-complete.md', function (err) {
         assert.equal(err.length, 2);
+        assert.include(err[0].message, "Unknown tag \'section\'");
+        assert.include(err[1].message, "Unknown tag \'endsection\'");
         done();
       });
     });
@@ -21,6 +23,7 @@ describe('tags', function() {
       linter.loadTags();
       linter.lintFile('./testcases/sectiontag-incomplete.md', function (err) {
         assert.equal(err.length, 1);
+        assert.include(err[0].message, "section tag was never closed");
         done();
       });
     });
@@ -29,7 +32,7 @@ describe('tags', function() {
       linter.loadTags();
       linter.lintFile('./testcases/sectiontag-incomplete-02.md', function (err) {
         assert.equal(err.length, 1);
-        console.log(err);
+        assert.include(err[0].message, "Unknown tag \'endsection\'");
         done();
       });
     })
