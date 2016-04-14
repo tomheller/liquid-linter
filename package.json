@@ -1,0 +1,24 @@
+{
+  "name": "liquid-linter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.dynatrace.vmta/dynatrace/liquid-linter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.9.1"
+  },
+  "dependencies": {
+    "bluebird": "^3.3.5",
+    "liquid-node": "^2.6.1"
+  }
+}
