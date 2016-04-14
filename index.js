@@ -1,6 +1,6 @@
 const fs = require('fs');
 const Promise = require('bluebird');
-const testString = fs.readFileSync('./testcases/section.md').toString();
+const requireDir = require('require-dir');
 
 const Liquid = require("liquid-node");
 const engine = new Liquid.Engine;
@@ -30,12 +30,21 @@ const parseChunk = (chunk) => {
     });
 };
 
-const printErrors = () => {
-  Array.prototype.forEach.call(errors, (err) => console.error(err.message.replace(/\n/g,' ')));
+
+const linter = {
+  lintFile: (filepath, callback) => {
+    errors = [];
+    const testString = fs.readFileSync(filepath).toString();
+    allchecks.push(parseChunk(testString));
+    Promise.all(allchecks)
+      .then(() => callback(errors));
+  },
+  loadTags: (dirpath) => {
+    const tags = requireDir('./tags');
+    for(tag in tags) {
+      tags[tag](engine);
+    }
+  },
 };
 
-
-
-allchecks.push(parseChunk(testString));
-Promise.all(allchecks)
-  .then(() => printErrors());
+module.exports = linter;
