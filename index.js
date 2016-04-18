@@ -48,12 +48,25 @@ const linter = {
           .then(() => errors.reverse());
       });
   },
+  lintString: (string, callback) => {
+    errors = [];
+    allchecks.push(parseChunk(string));
+    Promise.all(allchecks)
+      .then(() => callback(errors.reverse()));
+  },
+  lintStringPromise: (string) => {
+    errors = [];
+    allchecks.push(parseChunk(string));
+    return Promise.all(allchecks)
+      .then(() => errors.reverse());
+  },
   loadTags: (dirpath) => {
-    const tags = requireDir('./tags');
+    const tags = requireDir(dirpath);
     for(tag in tags) {
       tags[tag](engine);
     }
   },
+
 };
 
 module.exports = linter;

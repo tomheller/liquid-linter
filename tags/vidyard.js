@@ -1,22 +1,17 @@
-const extend = require('../lib/extend.js');
+'use strict';
+
 const Liquid = require('liquid-node');
 
+class VidyardTag extends Liquid.Tag {
+  constructor(template, tag, params) {
+    super(template, tag, params);
+  }
+
+  render(context) {
+    return super.render(context);
+  }
+}
+
 module.exports = (engine) => {
-
-  hasProp = {}.hasOwnProperty;
-  VidyardTag = (function(superClass) {
-    extend(VidyardTag, superClass);
-
-    function validateParams(markup) {
-
-    }
-
-    function VidyardTag(template, tagname, markup) {
-      validateParams(markup);
-      return VidyardTag.__super__.constructor.apply(this, arguments);
-    }
-    VidyardTag.prototype.render = () => {};
-    return VidyardTag;
-  })(Liquid.Tag);
-  engine.registerTag("vidyard", VidyardTag);
-};
+  engine.registerTag('vidyard', VidyardTag);
+}

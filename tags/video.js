@@ -1,22 +1,17 @@
-const extend = require('../lib/extend.js');
+'use strict';
+
 const Liquid = require('liquid-node');
 
+class VideoTag extends Liquid.Tag {
+  constructor(template, tag, params) {
+    super(template, tag, params);
+  }
+
+  render(context) {
+    return super.render(context);
+  }
+}
+
 module.exports = (engine) => {
-
-  hasProp = {}.hasOwnProperty;
-  VideoTag = (function(superClass) {
-    extend(VideoTag, superClass);
-
-    function validateParams(markup) {
-
-    }
-
-    function VideoTag(template, tagname, markup) {
-      validateParams(markup);
-      return VideoTag.__super__.constructor.apply(this, arguments);
-    }
-    VideoTag.prototype.render = () => {};
-    return VideoTag;
-  })(Liquid.Tag);
-  engine.registerTag("video", VideoTag);
-};
+  engine.registerTag('video', VideoTag);
+}

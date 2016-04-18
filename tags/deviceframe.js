@@ -1,22 +1,17 @@
-const extend = require('../lib/extend.js');
+'use strict';
+
 const Liquid = require('liquid-node');
 
+class DeviceFrameTag extends Liquid.Block {
+  constructor(template, tag, params) {
+    super(template, tag, params);
+  }
+
+  render(context) {
+    return super.render(context);
+  }
+}
+
 module.exports = (engine) => {
-
-  hasProp = {}.hasOwnProperty;
-  DeviceFrameTag = (function(superClass) {
-    extend(DeviceFrameTag, superClass);
-
-    function validateParams(markup) {
-
-    }
-
-    function DeviceFrameTag(template, tagname, markup) {
-      validateParams(markup);
-      return DeviceFrameTag.__super__.constructor.apply(this, arguments);
-    }
-    DeviceFrameTag.prototype.render = () => {};
-    return DeviceFrameTag;
-  })(Liquid.Block);
-  engine.registerTag("deviceframe", DeviceFrameTag);
-};
+  engine.registerTag('deviceframe', DeviceFrameTag);
+}

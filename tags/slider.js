@@ -1,22 +1,17 @@
-const extend = require('../lib/extend.js');
+'use strict';
+
 const Liquid = require('liquid-node');
 
+class SliderTag extends Liquid.Block {
+  constructor(template, tag, params) {
+    super(template, tag, params);
+  }
+
+  render(context) {
+    return super.render(context);
+  }
+}
+
 module.exports = (engine) => {
-
-  hasProp = {}.hasOwnProperty;
-  SliderTag = (function(superClass) {
-    extend(SliderTag, superClass);
-
-    function validateParams(markup) {
-
-    }
-
-    function SliderTag(template, tagname, markup) {
-      validateParams(markup);
-      return SliderTag.__super__.constructor.apply(this, arguments);
-    }
-    SliderTag.prototype.render = () => {};
-    return SliderTag;
-  })(Liquid.Block);
-  engine.registerTag("slider", SliderTag);
-};
+  engine.registerTag('slider', SliderTag);
+}

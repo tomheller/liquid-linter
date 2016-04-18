@@ -1,22 +1,17 @@
-const extend = require('../lib/extend.js');
+'use strict';
+
 const Liquid = require('liquid-node');
 
+class ProductCardTag extends Liquid.Block {
+  constructor(template, tag, params) {
+    super(template, tag, params);
+  }
+
+  render(context) {
+    return super.render(context);
+  }
+}
+
 module.exports = (engine) => {
-
-  hasProp = {}.hasOwnProperty;
-  ProductCardTag = (function(superClass) {
-    extend(ProductCardTag, superClass);
-
-    function validateParams(markup) {
-
-    }
-
-    function ProductCardTag(template, tagname, markup) {
-      validateParams(markup);
-      return ProductCardTag.__super__.constructor.apply(this, arguments);
-    }
-    ProductCardTag.prototype.render = () => {};
-    return ProductCardTag;
-  })(Liquid.Block);
-  engine.registerTag("productcard", ProductCardTag);
-};
+  engine.registerTag('productcard', ProductCardTag);
+}

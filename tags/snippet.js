@@ -1,22 +1,17 @@
-const extend = require('../lib/extend.js');
+'use strict';
+
 const Liquid = require('liquid-node');
 
+class SnippetsTag extends Liquid.Tag {
+  constructor(template, tag, params) {
+    super(template, tag, params);
+  }
+
+  render(context) {
+    return super.render(context);
+  }
+}
+
 module.exports = (engine) => {
-
-  hasProp = {}.hasOwnProperty;
-  SnippetTag = (function(superClass) {
-    extend(SnippetTag, superClass);
-
-    function validateParams(markup) {
-
-    }
-
-    function SnippetTag(template, tagname, markup) {
-      validateParams(markup);
-      return SnippetTag.__super__.constructor.apply(this, arguments);
-    }
-    SnippetTag.prototype.render = () => {};
-    return SnippetTag;
-  })(Liquid.Tag);
-  engine.registerTag("snippet", SnippetTag);
-};
+  engine.registerTag('snippet', SnippetsTag);
+}

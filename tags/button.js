@@ -1,22 +1,17 @@
-const extend = require('../lib/extend.js');
+'use strict';
+
 const Liquid = require('liquid-node');
 
+class ButtonTag extends Liquid.Tag {
+  constructor(template, tag, params) {
+    super(template, tag, params);
+  }
+
+  render(context) {
+    return super.render(context);
+  }
+}
+
 module.exports = (engine) => {
-
-  hasProp = {}.hasOwnProperty;
-  ButtonTag = (function(superClass) {
-    extend(ButtonTag, superClass);
-
-    function validateParams(markup) {
-
-    }
-
-    function ButtonTag(template, tagname, markup) {
-      validateParams(markup);
-      return ButtonTag.__super__.constructor.apply(this, arguments);
-    }
-    ButtonTag.prototype.render = () => {};
-    return ButtonTag;
-  })(Liquid.Tag);
-  engine.registerTag("button", ButtonTag);
-};
+  engine.registerTag('button', ButtonTag);
+}
