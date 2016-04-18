@@ -1,5 +1,5 @@
-const fs = require('fs');
 const Promise = require('bluebird');
+const fs = Promise.promisifyAll(require('fs'));
 const requireDir = require('require-dir');
 
 const Liquid = require("liquid-node");
@@ -37,7 +37,16 @@ const linter = {
     const testString = fs.readFileSync(filepath).toString();
     allchecks.push(parseChunk(testString));
     Promise.all(allchecks)
-      .then(() => callback(errors));
+      .then(() => callback(errors.reverse()));
+  },
+  lintFilePromise: (filepath) => {
+    errors = [];
+    return fs.readFileAsync(filepath)
+      .then((buffer) => {
+        allchecks.push(parseChunk(buffer.toString()));
+        return Promise.all(allchecks)
+          .then(() => errors.reverse());
+      });
   },
   loadTags: (dirpath) => {
     const tags = requireDir('./tags');

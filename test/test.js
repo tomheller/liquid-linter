@@ -2,18 +2,18 @@ const assert = require('chai').assert;
 const linter = require('../index.js');
 
 describe('tags', function() {
-  describe('hooks', function() {
-    beforeEach(function() {
-      linter = require('../index.js');
-    });
-  });
 
   describe('sectiontag', function() {
+    describe('hooks', function() {
+      beforeEach(function() {
+        linter = require('../index.js');
+      });
+    });
     it('should return 2 Errors when section tag is unknown', function (done) {
       linter.lintFile('./testcases/sectiontag/sectiontag-complete.md', function (err) {
         assert.equal(err.length, 2);
-        assert.include(err[0].message, "Unknown tag \'section\'");
-        assert.include(err[1].message, "Unknown tag \'endsection\'");
+        assert.include(err[0].message, "Unknown tag \'endsection\'");
+        assert.include(err[1].message, "Unknown tag \'section\'");
         done();
       });
     });
@@ -54,6 +54,12 @@ describe('tags', function() {
   });
 
   describe('iftag', function() {
+    describe('hooks', function() {
+      beforeEach(function() {
+        linter = require('../index.js');
+      });
+    });
+
     it('should return no Error when if tag is complete', function (done) {
       linter.lintFile('./testcases/ifstatement/ifstatement-complete.md', function (err) {
         assert.equal(err.length, 0);
@@ -102,7 +108,32 @@ describe('fullpages', function() {
 
   it('Should return no Error when parsing well formed document', function (done) {
     linter.lintFile('./testcases/fulldocuments/wellformed.md', function (err) {
-      asset.equal(err.length, 0);
+      assert.equal(err.length, 0);
+      done();
     });
+  });
+
+  it('Should return 2 Error when parsing malformed document', function (done) {
+    linter.lintFile('./testcases/fulldocuments/malformed.md', function (err) {
+      assert.equal(err.length, 2);
+      done();
+    });
+  });
+});
+
+describe('promisify', function() {
+  describe('hooks', function() {
+    beforeEach(function() {
+      linter = require('../index.js');
+      linter.loadTags();
+    });
+  });
+
+  it('Should return 2 Error when parsing malformed document in promise mode', function (done) {
+    linter.lintFilePromise('./testcases/fulldocuments/malformed.md')
+      .then(function(err) {
+        assert.equal(err.length, 2);
+        done();
+      });
   });
 });

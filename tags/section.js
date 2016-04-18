@@ -7,12 +7,12 @@ module.exports = (engine) => {
   SectionTag = (function(superClass) {
     extend(SectionTag, superClass);
 
-    function parseParams(markup) {
-
+    function validateParams(markup) {
+    
     }
 
     function SectionTag(template, tagname, markup) {
-      params = parseParams(markup);
+      validateParams(markup);
       return SectionTag.__super__.constructor.apply(this, arguments);
     }
     SectionTag.prototype.render = () => {};
