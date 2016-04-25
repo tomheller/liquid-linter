@@ -16,7 +16,6 @@ const replaceProblemWithSpace = (chunk, err) => {
   var newlinestring = replacedstring[err.location.line-1];
   newlinestring = newlinestring.substring(0, err.location.col-1) + replacee + newlinestring.substring(err.location.col-1 + replacer.length, newlinestring.length);
   replacedstring[err.location.line-1] = newlinestring;
-  // console.log(`replaced ${replacer} with '${replacee}' in ${err.location.line} : ${err.location.col}`);
   return replacedstring.join('\n');
 };
 
@@ -60,13 +59,18 @@ const linter = {
     return Promise.all(allchecks)
       .then(() => errors.reverse());
   },
-  loadTags: (dirpath) => {
-    const tags = requireDir(dirpath);
-    for(tag in tags) {
-      tags[tag](engine);
+  loadTags: (obj) => {
+    const opts = {
+      blocks: obj.blocks || [],
+      tags: obj.tags || []
+    };
+    for (var i = 0; i < opts.blocks.length; i++) {
+      engine.registerTag(opts.blocks[i], Liquid.Block);
+    }
+    for (var j = 0; j < opts.tags.length; j++) {
+      engine.registerTag(opts.tags[j], Liquid.Tag);
     }
   },
-
 };
 
 module.exports = linter;

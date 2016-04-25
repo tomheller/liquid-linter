@@ -1,6 +1,11 @@
 const assert = require('chai').assert;
 const linter = require('../index.js');
 
+const tags = {
+  blocks: ["column", "deviceframe", "productcard", "section", "slider"],
+  tags: ["button", "customerquote", "snippet", "video", "vidyard"]
+};
+
 describe('tags', function() {
 
   describe('sectiontag', function() {
@@ -19,7 +24,7 @@ describe('tags', function() {
     });
 
     it('should return 1 Error when section tag does not close', function (done) {
-      linter.loadTags('./tags');
+      linter.loadTags(tags);
       linter.lintFile('./testcases/sectiontag/sectiontag-incomplete.md', function (err) {
         assert.equal(err.length, 1);
         assert.include(err[0].message, "section tag was never closed");
@@ -28,7 +33,7 @@ describe('tags', function() {
     });
 
     it('should return 1 Error when closed section tag does not open', function (done) {
-      linter.loadTags('./tags');
+      linter.loadTags(tags);
       linter.lintFile('./testcases/sectiontag/sectiontag-incomplete-02.md', function (err) {
         assert.equal(err.length, 1);
         assert.include(err[0].message, "Unknown tag \'endsection\'");
@@ -37,7 +42,7 @@ describe('tags', function() {
     });
 
     it('should return no Error when bgimage parameter is good', function (done) {
-      linter.loadTags('./tags');
+      linter.loadTags(tags);
       linter.lintFile('./testcases/sectiontag/sectiontag-parameter-bgimage-passing.md', function (err) {
         assert.equal(err.length, 0);
         done();
@@ -45,7 +50,7 @@ describe('tags', function() {
     });
 
     it('should return 1 Error when bgimage parameter is malformed', function (done) {
-      linter.loadTags('./tags');
+      linter.loadTags(tags);
       linter.lintFile('./testcases/sectiontag/sectiontag-parameter-bgimage.md', function (err) {
         assert.equal(err.length, 1);
         done();
@@ -102,7 +107,7 @@ describe('fullpages', function() {
   describe('hooks', function() {
     beforeEach(function() {
       linter = require('../index.js');
-      linter.loadTags('./tags');
+      linter.loadTags(tags);
     });
   });
 
@@ -125,7 +130,7 @@ describe('promisify', function() {
   describe('hooks', function() {
     beforeEach(function() {
       linter = require('../index.js');
-      linter.loadTags('./tags');
+      linter.loadTags(tags);
     });
   });
 
