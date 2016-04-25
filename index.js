@@ -23,7 +23,9 @@ const parseChunk = (chunk) => {
   return engine
     .parse(chunk)
     .catch((err) => {
-      errors.push(err);
+      if(err.name !== "Liquid.FileSystemError") {
+        errors.push(err);
+      }
       chunk = replaceProblemWithSpace(chunk, err);
       return parseChunk(chunk);
     });
