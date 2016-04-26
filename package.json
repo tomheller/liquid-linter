@@ -1,7 +1,7 @@
 {
   "name": "liquid-linter",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "A liquid tepmlate language linter",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "bluebird": "^3.3.5",
-    "liquid-node": "^2.6.1",
-    "require-dir": "^0.3.0"
+    "liquid-node": "^2.6.1"
   }
 }

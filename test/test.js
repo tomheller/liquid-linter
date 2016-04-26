@@ -49,13 +49,6 @@ describe('tags', function() {
       });
     });
 
-    it('should return 1 Error when bgimage parameter is malformed', function (done) {
-      linter.loadTags(tags);
-      linter.lintFile('./testcases/sectiontag/sectiontag-parameter-bgimage.md', function (err) {
-        assert.equal(err.length, 1);
-        done();
-      });
-    });
   });
 
   describe('iftag', function() {
@@ -98,29 +91,6 @@ describe('variables', function() {
   it('Should return no Error, when variable is not opening', function (done) {
     linter.lintFile('./testcases/variable/variable-notopening.md', function (err) {
       assert.equal(err.length, 0);
-      done();
-    });
-  });
-});
-
-describe('fullpages', function() {
-  describe('hooks', function() {
-    beforeEach(function() {
-      linter = require('../index.js');
-      linter.loadTags(tags);
-    });
-  });
-
-  it('Should return no Error when parsing well formed document', function (done) {
-    linter.lintFile('./testcases/fulldocuments/wellformed.md', function (err) {
-      assert.equal(err.length, 0);
-      done();
-    });
-  });
-
-  it('Should return 2 Error when parsing malformed document', function (done) {
-    linter.lintFile('./testcases/fulldocuments/malformed.md', function (err) {
-      assert.equal(err.length, 2);
       done();
     });
   });
