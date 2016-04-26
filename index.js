@@ -1,6 +1,5 @@
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'));
-const requireDir = require('require-dir');
 
 const Liquid = require("liquid-node");
 const engine = new Liquid.Engine;
@@ -23,7 +22,6 @@ const parseChunk = (chunk) => {
   return engine
     .parse(chunk)
     .catch((err) => {
-      console.log(err);
       if(err.name === "Liquid.SyntaxError") {
         const problemReg = /at (.*) /;
         const length = err.message.match(problemReg)[1].length;
