@@ -23,7 +23,11 @@ const parseChunk = (chunk) => {
   return engine
     .parse(chunk)
     .catch((err) => {
-      if(err.name !== "Liquid.FileSystemError") {
+      console.log(err);
+      if(err.name === "Liquid.SyntaxError") {
+        const problemReg = /at (.*) /;
+        const length = err.message.match(problemReg)[1].length;
+        err.location.lenght = length;
         errors.push(err);
       }
       chunk = replaceProblemWithSpace(chunk, err);
