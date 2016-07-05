@@ -4,9 +4,6 @@ const fs = Promise.promisifyAll(require('fs'));
 const Liquid = require("liquid-node");
 const engine = new Liquid.Engine;
 
-var errors = [];
-var allchecks = [];
-
 const replaceProblemWithSpace = (chunk, err) => {
   const problemReg = /at (.*) /;
   const replacer = err.message.match(problemReg)[1];
@@ -18,7 +15,7 @@ const replaceProblemWithSpace = (chunk, err) => {
   return replacedstring.join('\n');
 };
 
-const parseChunk = (chunk) => {
+const parseChunk = (chunk, errors) => {
   return engine
     .parse(chunk)
     .catch((err) => {
@@ -36,30 +33,34 @@ const parseChunk = (chunk) => {
 
 const linter = {
   lintFile: (filepath, callback) => {
-    errors = [];
+    const errors = [];
+    const allchecks = [];
     const testString = fs.readFileSync(filepath).toString();
-    allchecks.push(parseChunk(testString));
+    allchecks.push(parseChunk(testString, errors));
     Promise.all(allchecks)
       .then(() => callback(errors.reverse()));
   },
   lintFilePromise: (filepath) => {
-    errors = [];
+    const errors = [];
+    const allchecks = [];
     return fs.readFileAsync(filepath)
       .then((buffer) => {
-        allchecks.push(parseChunk(buffer.toString()));
+        allchecks.push(parseChunk(buffer.toString(), errors));
         return Promise.all(allchecks)
           .then(() => errors.reverse());
       });
   },
   lintString: (string, callback) => {
-    errors = [];
-    allchecks.push(parseChunk(string));
+    const errors = [];
+    const allchecks = [];
+    allchecks.push(parseChunk(string, errors));
     Promise.all(allchecks)
       .then(() => callback(errors.reverse()));
   },
   lintStringPromise: (string) => {
-    errors = [];
-    allchecks.push(parseChunk(string));
+    const errors = [];
+    const allchecks = [];
+    allchecks.push(parseChunk(string, errors));
     return Promise.all(allchecks)
       .then(() => errors.reverse());
   },
