@@ -26,7 +26,7 @@ const parseChunk = (chunk, errors) => {
         errors.push(err);
       }
       chunk = replaceProblemWithSpace(chunk, err);
-      return parseChunk(chunk);
+      return parseChunk(chunk, errors);
     });
 };
 
