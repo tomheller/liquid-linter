@@ -8,7 +8,6 @@ A node package that lets you lint liquid template strings.
 npm install --save liquid-linter
 ```
 
-
 ## Usage
 
 ```javascript
@@ -21,6 +20,10 @@ linter.lintString(testString, function(err) {
   };
 });
 ```
+
+## CLI usage
+
+If you are looking to use the liquid linter as a cli tool, @Potherca created a wrapper around this package, which you can find here: https://github.com/DealerDirect/liquid-linter-cli
 
 ## Methods
 
