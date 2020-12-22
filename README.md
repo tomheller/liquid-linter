@@ -1,3 +1,9 @@
+# Repository has been archived
+
+Development will be continued in [this repository](https://github.com/UnicornGlobal/liquid-linter), thanks to [@UnicornGlobal](https://github.com/UnicornGlobal) and [@potherca](https://github.com/potherca)
+
+-----
+
 # Liquid Linter
 
 A node package that lets you lint liquid template strings.
